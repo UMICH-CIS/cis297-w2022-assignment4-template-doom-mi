@@ -6,6 +6,9 @@ using System.Runtime.Serialization;
 
 namespace PatientRecordApplication
 {
+    /// <summary>
+    /// Main Patient Record Program that calls all methods and displays menu
+    /// </summary>
     class Program
     {
         static void Main(string[] args)

@@ -7,8 +7,18 @@ using static System.Console;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
+/// <summary>
+/// This program implements exception handling and data entry from a file in the form of a patient system for doctors
+/// </summary>
+/// <Student>Dominic Verardi</Student>
+/// <Class>CIS297</Class>
+/// <Semester>Winter 2022</Semester>
+
 namespace PatientRecordApplication
 {
+    /// <summary>
+    /// File class that creats and edits file
+    /// </summary>
     class PatientFile
     {
         private string FileName;
@@ -18,7 +28,7 @@ namespace PatientRecordApplication
             this.FileName = fileName;
         }
 
-        //File operations
+        //File operations that checks if it needs to create file
         public void FileOperations()
         {
             if (File.Exists(FileName))
@@ -42,7 +52,7 @@ namespace PatientRecordApplication
             }
         }
 
-        //Writing data to a Sequential Access text file
+        //Writing data to a Sequential Access text file for patient information
         public void SequentialAddPatientOperation()
         {
             const int END = 999;
@@ -91,7 +101,7 @@ namespace PatientRecordApplication
             outFile.Close();
         }
 
-        //Read data from a Sequential Access File
+        //Read patient data from a Sequential Access File
         public void ReadSequentialAccessOperation()
         {
             const char DELIM = ',';
@@ -119,7 +129,7 @@ namespace PatientRecordApplication
         }
 
         //repeatedly searches a file to produce 
-        //lists of employees who meet a minimum salary requirement
+        //lists of patients who meet a minimum balance owed
         public void FindPatientMinBalance()
         {
             const char DELIM = ',';
@@ -166,6 +176,7 @@ namespace PatientRecordApplication
             inFile.Close(); //these two statements are reversed
         }
 
+        //finds patient in text file by ID
         public void FindPatientID()
         {
             Clear();
