@@ -5,5 +5,6 @@ namespace PatientRecordApplication
     {       
         public int PatientID { get; set; }
         public double Balance { get; set; }
+
     }
 }

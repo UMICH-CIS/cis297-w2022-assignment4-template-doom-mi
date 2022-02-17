@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PatientNotFoundException.cs" />
     <Compile Include="PatientFile.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Patient.cs" />

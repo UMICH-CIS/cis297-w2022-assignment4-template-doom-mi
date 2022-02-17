@@ -48,18 +48,39 @@ namespace PatientRecordApplication
             const int END = 999;
             const string DELIM = ",";
             Patient patient = new Patient();
+
             FileStream outFile = new FileStream(FileName,
-               FileMode.Create, FileAccess.Write);
+            FileMode.Create, FileAccess.Write);
             StreamWriter writer = new StreamWriter(outFile);
+
             Write("Enter patient ID number or " + END +
                " to quit >> ");
-            patient.PatientID = Convert.ToInt32(ReadLine());
+            try
+            {
+                patient.PatientID = Convert.ToInt32(ReadLine());
+            }
+            catch(PatientNotFoundException)
+            {
+                
+            }
+
             while (patient.PatientID != END)
             {
                 Write("Enter last name >> ");
                 patient.Name = ReadLine();
                 Write("Enter balance owed >> ");
-                patient.Balance = Convert.ToDouble(ReadLine());
+
+                try
+                {
+                    patient.Balance = Convert.ToDouble(ReadLine());
+                }
+
+                catch (FormatException)
+                {
+                    WriteLine("Invalid input for balance.");
+
+                }
+
                 writer.WriteLine(patient.PatientID + DELIM + patient.Name +
                    DELIM + patient.Balance);
                 Write("Enter next patient ID number or " +
@@ -117,7 +138,14 @@ namespace PatientRecordApplication
             {
                 WriteLine("\n{0,-5}{1,-12}{2,8}\n",
                    "Num", "Name", "Balance");
-                inFile.Seek(0, SeekOrigin.Begin);
+                try
+                {
+                    inFile.Seek(0, SeekOrigin.Begin);
+                }
+                catch (FileNotFoundException)
+                {
+                    WriteLine("Error: File Not Found");
+                }
                 recordIn = reader.ReadLine();
                 while (recordIn != null)
                 {
