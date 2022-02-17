@@ -47,9 +47,8 @@ namespace PatientRecordApplication
         {
             const int END = 999;
             const string DELIM = ",";
-            string FILENAME = FileName;
             Patient patient = new Patient();
-            FileStream outFile = new FileStream(FILENAME,
+            FileStream outFile = new FileStream(FileName,
                FileMode.Create, FileAccess.Write);
             StreamWriter writer = new StreamWriter(outFile);
             Write("Enter patient ID number or " + END +
