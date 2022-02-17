@@ -39,7 +39,6 @@ namespace PatientRecordApplication
                 writer.WriteLine("PATIENT RECORDS:");
                 writer.Close();
                 outFile.Close();
-
             }
         }
 
@@ -65,7 +64,7 @@ namespace PatientRecordApplication
         }
 
         //Writing data to a Sequential Access text file
-        public void SequentialAccessWriteOperation()
+        public void SequentialAddPatientOperation()
         {
             const int END = 999;
             const string DELIM = ",";

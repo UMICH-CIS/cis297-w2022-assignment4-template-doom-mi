@@ -18,20 +18,17 @@ namespace PatientRecordApplication
 
             file.FileOperations();
             file.DirectoryOperations();
-            file.SequentialAccessWriteOperation();
-            file.ReadSequentialAccessOperation();
-            file.FindPatients();
 
             while (true)
             {
                 switch (DisplayMenu())
                 {
                     case 1:
-                        
+                        file.SequentialAddPatientOperation();
                         break;
 
                     case 2:
-                        
+                        file.ReadSequentialAccessOperation();
                         break;
 
                     case 3:
@@ -39,7 +36,7 @@ namespace PatientRecordApplication
                         break;
 
                     case 4:
-                        
+                        file.FindPatients();
                         break;
 
                     case 5:
@@ -49,7 +46,7 @@ namespace PatientRecordApplication
                         break;
                 }
 
-                WriteLine("Press Enter to Continue.");
+                WriteLine("Press any key to continue.");
                 ReadLine();
             }
 
@@ -58,7 +55,7 @@ namespace PatientRecordApplication
             {
                 int input = 0;
                 Clear();
-                WriteLine("1 Add New Patient.");
+                WriteLine("1 Add New Patients.");
                 WriteLine("2 Display File Information.");
                 WriteLine("3 Search Patient by ID.");
                 WriteLine("4 Find Patients with the Minimun Balance Due.");
@@ -71,7 +68,7 @@ namespace PatientRecordApplication
                 }
                 catch (FormatException)
                 {
-                    WriteLine("Invalid value entered for user input.");
+                    WriteLine("Invalid input entered by user.");
                 }
 
                 return input;
