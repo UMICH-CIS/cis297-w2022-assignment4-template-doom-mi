@@ -32,6 +32,14 @@ namespace PatientRecordApplication
             else
             {
                 WriteLine("File does not exist");
+                FileStream outFile = new
+                FileStream(FileName, FileMode.Create,
+                FileAccess.Write);
+                StreamWriter writer = new StreamWriter(outFile);
+                writer.WriteLine("PATIENT RECORDS:");
+                writer.Close();
+                outFile.Close();
+
             }
         }
 
@@ -54,21 +62,6 @@ namespace PatientRecordApplication
             {
                 WriteLine("Directory does not exist");
             }
-        }
-
-        //Using FileStream to create and write some text into it
-        public void FileStreamOperations()
-        {
-            FileStream outFile = new
-            FileStream("SomeText.txt", FileMode.Create,
-            FileAccess.Write);
-            StreamWriter writer = new StreamWriter(outFile);
-            Write("Enter some text >> ");
-            string text = ReadLine();
-            writer.WriteLine(text);
-            // Error occurs if the next two statements are reversed
-            writer.Close();
-            outFile.Close();
         }
 
         //Writing data to a Sequential Access text file
