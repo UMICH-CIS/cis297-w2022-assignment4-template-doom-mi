@@ -17,7 +17,6 @@ namespace PatientRecordApplication
 
 
             file.FileOperations();
-            file.DirectoryOperations();
 
             while (true)
             {
@@ -32,11 +31,11 @@ namespace PatientRecordApplication
                         break;
 
                     case 3:
-                        
+                        file.FindPatientID();
                         break;
 
                     case 4:
-                        file.FindPatients();
+                        file.FindPatientMinBalance();
                         break;
 
                     case 5:
