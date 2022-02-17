@@ -8,8 +8,6 @@ namespace PatientRecordApplication
 {
     class Person
     {
-        public int EmpNum { get; set; }
         public string Name { get; set; }
-        public double Salary { get; set; }
     }
 }

@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace PatientRecordApplication
 {
-    class Employee
+    class Patient : Person
     {       
-        public int EmpNum { get; set; }
-        public string Name { get; set; }
-        public double Salary { get; set; }
+        public int PatientID { get; set; }
+        public double Balance { get; set; }
     }
 }

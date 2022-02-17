@@ -60,6 +60,7 @@ namespace PatientRecordApplication
                 WriteLine("Directory does not exist");
             }
         }
+
         //Using FileStream to create and write some text into it
         static void FileStreamOperations()
         {
@@ -80,25 +81,25 @@ namespace PatientRecordApplication
         {
             const int END = 999;
             const string DELIM = ",";
-            const string FILENAME = "EmployeeData.txt";
-            Employee emp = new Employee();
+            const string FILENAME = "PatientData.txt";
+            Patient patient = new Patient();
             FileStream outFile = new FileStream(FILENAME,
                FileMode.Create, FileAccess.Write);
             StreamWriter writer = new StreamWriter(outFile);
-            Write("Enter employee number or " + END +
+            Write("Enter patient ID number or " + END +
                " to quit >> ");
-            emp.EmpNum = Convert.ToInt32(ReadLine());
-            while (emp.EmpNum != END)
+            patient.PatientID = Convert.ToInt32(ReadLine());
+            while (patient.PatientID != END)
             {
                 Write("Enter last name >> ");
-                emp.Name = ReadLine();
-                Write("Enter salary >> ");
-                emp.Salary = Convert.ToDouble(ReadLine());
-                writer.WriteLine(emp.EmpNum + DELIM + emp.Name +
-                   DELIM + emp.Salary);
-                Write("Enter next employee number or " +
+                patient.Name = ReadLine();
+                Write("Enter balance owed >> ");
+                patient.Balance = Convert.ToDouble(ReadLine());
+                writer.WriteLine(patient.PatientID + DELIM + patient.Name +
+                   DELIM + patient.Balance);
+                Write("Enter next patient ID number or " +
                    END + " to quit >> ");
-                emp.EmpNum = Convert.ToInt32(ReadLine());
+                patient.PatientID = Convert.ToInt32(ReadLine());
             }
             writer.Close();
             outFile.Close();
@@ -108,24 +109,24 @@ namespace PatientRecordApplication
         static void ReadSequentialAccessOperation()
         {
             const char DELIM = ',';
-            const string FILENAME = "EmployeeData.txt";
-            Employee emp = new Employee();
+            const string FILENAME = "PatientData.txt";
+            Patient patient = new Patient();
             FileStream inFile = new FileStream(FILENAME,
                FileMode.Open, FileAccess.Read);
             StreamReader reader = new StreamReader(inFile);
             string recordIn;
             string[] fields;
             WriteLine("\n{0,-5}{1,-12}{2,8}\n",
-               "Num", "Name", "Salary");
+               "ID", "Name", "Balance");
             recordIn = reader.ReadLine();
             while (recordIn != null)
             {
                 fields = recordIn.Split(DELIM);
-                emp.EmpNum = Convert.ToInt32(fields[0]);
-                emp.Name = fields[1];
-                emp.Salary = Convert.ToDouble(fields[2]);
+                patient.PatientID = Convert.ToInt32(fields[0]);
+                patient.Name = fields[1];
+                patient.Balance = Convert.ToDouble(fields[2]);
                 WriteLine("{0,-5}{1,-12}{2,8}",
-                   emp.EmpNum, emp.Name, emp.Salary.ToString("C"));
+                   patient.PatientID, patient.Name, patient.Balance.ToString("C"));
                 recordIn = reader.ReadLine();
             }
             reader.Close();
@@ -138,35 +139,35 @@ namespace PatientRecordApplication
         {
             const char DELIM = ',';
             const int END = 999;
-            const string FILENAME = "EmployeeData.txt";
-            Employee emp = new Employee();
+            const string FILENAME = "PatientData.txt";
+            Patient patient = new Patient();
             FileStream inFile = new FileStream(FILENAME,
                FileMode.Open, FileAccess.Read);
             StreamReader reader = new StreamReader(inFile);
             string recordIn;
             string[] fields;
             double minSalary;
-            Write("Enter minimum salary to find or " +
+            Write("Enter minimum balance owed to find or " +
                END + " to quit >> ");
             minSalary = Convert.ToDouble(Console.ReadLine());
             while (minSalary != END)
             {
                 WriteLine("\n{0,-5}{1,-12}{2,8}\n",
-                   "Num", "Name", "Salary");
+                   "Num", "Name", "Balance");
                 inFile.Seek(0, SeekOrigin.Begin);
                 recordIn = reader.ReadLine();
                 while (recordIn != null)
                 {
                     fields = recordIn.Split(DELIM);
-                    emp.EmpNum = Convert.ToInt32(fields[0]);
-                    emp.Name = fields[1];
-                    emp.Salary = Convert.ToDouble(fields[2]);
-                    if (emp.Salary >= minSalary)
-                        WriteLine("{0,-5}{1,-12}{2,8}", emp.EmpNum,
-                           emp.Name, emp.Salary.ToString("C"));
+                    patient.PatientID = Convert.ToInt32(fields[0]);
+                    patient.Name = fields[1];
+                    patient.Balance = Convert.ToDouble(fields[2]);
+                    if (patient.Balance >= minSalary)
+                        WriteLine("{0,-5}{1,-12}{2,8}", patient.PatientID,
+                           patient.Name, patient.Balance.ToString("C"));
                     recordIn = reader.ReadLine();
                 }
-                Write("\nEnter minimum salary to find or " +
+                Write("\nEnter minimum balance owed to find or " +
                    END + " to quit >> ");
                 minSalary = Convert.ToDouble(Console.ReadLine());
             }
@@ -183,34 +184,34 @@ namespace PatientRecordApplication
         {
             const int END = 999;
             const string FILENAME = "Data.ser";
-            Person emp = new Person();
+            Patient patient = new Patient();
             FileStream outFile = new FileStream(FILENAME,
                FileMode.Create, FileAccess.Write);
             BinaryFormatter bFormatter = new BinaryFormatter();
-            Write("Enter employee number or " + END +
+            Write("Enter patient ID number or " + END +
                " to quit >> ");
-            emp.EmpNum = Convert.ToInt32(ReadLine());
-            while (emp.EmpNum != END)
+            patient.PatientID = Convert.ToInt32(ReadLine());
+            while (patient.PatientID != END)
             {
                 Write("Enter last name >> ");
-                emp.Name = ReadLine();
-                Write("Enter salary >> ");
-                emp.Salary = Convert.ToDouble(ReadLine());
-                bFormatter.Serialize(outFile, emp);
-                Write("Enter employee number or " + END +
+                patient.Name = ReadLine();
+                Write("Enter balance owed >> ");
+                patient.Balance = Convert.ToDouble(ReadLine());
+                bFormatter.Serialize(outFile, patient);
+                Write("Enter patient ID number or " + END +
                    " to quit >> ");
-                emp.EmpNum = Convert.ToInt32(ReadLine());
+                patient.PatientID = Convert.ToInt32(ReadLine());
             }
             outFile.Close();
             FileStream inFile = new FileStream(FILENAME,
                FileMode.Open, FileAccess.Read);
             WriteLine("\n{0,-5}{1,-12}{2,8}\n",
-               "Num", "Name", "Salary");
+               "ID", "Name", "Balance");
             while (inFile.Position < inFile.Length)
             {
-                emp = (Person)bFormatter.Deserialize(inFile);
+                patient = (Patient)bFormatter.Deserialize(inFile);
                 WriteLine("{0,-5}{1,-12}{2,8}",
-                   emp.EmpNum, emp.Name, emp.Salary.ToString("C"));
+                   patient.PatientID, patient.Name, patient.Balance.ToString("C"));
             }
             inFile.Close();
         }
