@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static System.Console;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.RegularExpressions;
 
 /// <summary>
 /// This program implements exception handling and data entry from a file in the form of a patient system for doctors
@@ -64,10 +60,7 @@ namespace PatientRecordApplication
             const string DELIM = ",";
             Patient patient = new Patient();
 
-            FileStream outFile = new FileStream(FileName,
-            FileMode.Create, FileAccess.Write);
-            StreamWriter writer = new StreamWriter(outFile);
-
+            StreamWriter writer = new StreamWriter(FileName, true);
             Write("Enter patient ID number or " + END +
                " to quit >> ");
             patient.PatientID = Convert.ToInt32(ReadLine());
@@ -88,14 +81,14 @@ namespace PatientRecordApplication
                     WriteLine("Invalid input for balance.");
                 }
 
-                writer.WriteLine(patient.PatientID + DELIM + patient.Name +
-                   DELIM + patient.Balance);
+                    writer.WriteLine(patient.PatientID + DELIM + patient.Name +
+                       DELIM + patient.Balance);
+
                 Write("Enter next patient ID number or " +
                    END + " to quit >> ");
                 patient.PatientID = Convert.ToInt32(ReadLine());
             }
             writer.Close();
-            outFile.Close();
         }
 
         //Read patient data from a Sequential Access File
@@ -191,13 +184,13 @@ namespace PatientRecordApplication
 
             while (recordIn != null)
             {
-                fields = recordIn.Split(' ');
+                fields = recordIn.Split(',');
 
-                foreach (var record in fields)
+                foreach (var recordID in fields)
                 {
-                    if (record.Contains(id))
+                    if (recordID == id)
                     {
-                        WriteLine(record);
+                        WriteLine(recordIn);
                     }
                 }
 

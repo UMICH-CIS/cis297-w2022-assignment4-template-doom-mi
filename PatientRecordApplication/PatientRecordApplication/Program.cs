@@ -22,7 +22,6 @@ namespace PatientRecordApplication
             // asks for patient file name and stores the name
             Write("Enter a name for your patient file minus the extension type: ");
             string fileName = ReadLine() + ".txt";
-            Patient patient = new Patient();
             PatientFile file = new PatientFile(fileName);
 
             // checks if file by name is already created. if not, creates. if so, tells user and uses that file
@@ -68,7 +67,6 @@ namespace PatientRecordApplication
 
             int DisplayMenu()
             {
-                int input = 0;
                 Clear();
                 WriteLine("1 Add New Patients.");
                 WriteLine("2 Display File Information.");
@@ -76,8 +74,7 @@ namespace PatientRecordApplication
                 WriteLine("4 Find Patients with the Minimun Balance Due.");
                 WriteLine("5 Exit");
                 Write("\nPlease enter a number to select an option: ");
-                input = int.Parse(ReadLine());
-                return input;
+                return int.Parse(ReadLine());
             }
         }
     }
