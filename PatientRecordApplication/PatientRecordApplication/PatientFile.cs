@@ -188,9 +188,17 @@ namespace PatientRecordApplication
 
                 foreach (var recordID in fields)
                 {
-                    if (recordID == id)
+                    try
                     {
-                        WriteLine(recordIn);
+                        if (recordID == id)
+                        {
+                            WriteLine(recordIn);
+                        }
+                    }
+
+                    catch(PatientNotFoundException)
+                    {
+                        Write("Patient Not Found");
                     }
                 }
 
