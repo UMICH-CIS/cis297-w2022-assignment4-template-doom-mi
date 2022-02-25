@@ -60,7 +60,7 @@ namespace PatientRecordApplication
                         break;
                 }
 
-                WriteLine("Press any key to continue...");
+                WriteLine("\nPress any key to continue...");
                 ReadKey();
             }
 
@@ -74,7 +74,15 @@ namespace PatientRecordApplication
                 WriteLine("4 Find Patients with the Minimun Balance Due.");
                 WriteLine("5 Exit");
                 Write("\nPlease enter a number to select an option: ");
-                return int.Parse(ReadLine());
+                try
+                {
+                    return int.Parse(ReadLine());
+                }
+                catch(FormatException)
+                {
+                    Write("Invalid. Please enter a number shown available on the menu");
+                    return 0;
+                }
             }
         }
     }
