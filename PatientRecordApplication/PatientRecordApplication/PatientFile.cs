@@ -38,6 +38,8 @@ namespace PatientRecordApplication
                 File.GetCreationTime(FileName));
                 WriteLine("File was last written to " +
                 File.GetLastWriteTime(FileName));
+                WriteLine("\nPress any key to continue");
+                ReadKey();
             }
             else
             {
@@ -46,15 +48,18 @@ namespace PatientRecordApplication
                 FileStream(FileName, FileMode.Create,
                 FileAccess.Write);
                 StreamWriter writer = new StreamWriter(outFile);
-                writer.WriteLine("PATIENT RECORDS:");
                 writer.Close();
                 outFile.Close();
+                WriteLine("File created.");
+                WriteLine("\nPress any key to continue");
+                ReadKey();
             }
         }
 
         //Writing data to a Sequential Access text file for patient information
         public void SequentialAddPatientOperation()
         {
+            Clear();
             const int END = 999;
             const string DELIM = ",";
             Patient patient = new Patient();
@@ -65,14 +70,7 @@ namespace PatientRecordApplication
 
             Write("Enter patient ID number or " + END +
                " to quit >> ");
-            try
-            {
-                patient.PatientID = Convert.ToInt32(ReadLine());
-            }
-            catch(PatientNotFoundException)
-            {
-                
-            }
+            patient.PatientID = Convert.ToInt32(ReadLine());
 
             while (patient.PatientID != END)
             {
@@ -88,7 +86,6 @@ namespace PatientRecordApplication
                 catch (FormatException)
                 {
                     WriteLine("Invalid input for balance.");
-
                 }
 
                 writer.WriteLine(patient.PatientID + DELIM + patient.Name +
@@ -104,6 +101,7 @@ namespace PatientRecordApplication
         //Read patient data from a Sequential Access File
         public void ReadSequentialAccessOperation()
         {
+            Clear();
             const char DELIM = ',';
             Patient patient = new Patient();
             FileStream inFile = new FileStream(FileName,
@@ -132,6 +130,7 @@ namespace PatientRecordApplication
         //lists of patients who meet a minimum balance owed
         public void FindPatientMinBalance()
         {
+            Clear();
             const char DELIM = ',';
             const int END = 999;
             Patient patient = new Patient();
@@ -194,9 +193,12 @@ namespace PatientRecordApplication
             {
                 fields = recordIn.Split(' ');
 
-                if (fields[0] == id)
+                foreach (var record in fields)
                 {
-                    WriteLine(recordIn);
+                    if (record.Contains(id))
+                    {
+                        WriteLine(record);
+                    }
                 }
 
                 recordIn = reader.ReadLine();

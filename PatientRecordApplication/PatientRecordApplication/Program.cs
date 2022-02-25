@@ -11,36 +11,49 @@ namespace PatientRecordApplication
     /// </summary>
     class Program
     {
+        /// <summary>
+        /// This program creates a patient file and allows user to add more information
+        /// </summary>
+        /// <Student>Dominic Verardi</Student>
+        /// <Class>CIS297</Class>
+        /// <Semester>Winter 2022</Semester>
         static void Main(string[] args)
         {
-            Write("Enter a name for your patient file: ");
+            // asks for patient file name and stores the name
+            Write("Enter a name for your patient file minus the extension type: ");
             string fileName = ReadLine() + ".txt";
             Patient patient = new Patient();
             PatientFile file = new PatientFile(fileName);
 
-
+            // checks if file by name is already created. if not, creates. if so, tells user and uses that file
             file.FileOperations();
 
+            // switch case to ask for users selection
             while (true)
             {
                 switch (DisplayMenu())
                 {
+                    // calls method to add new patients to the patient file
                     case 1:
                         file.SequentialAddPatientOperation();
                         break;
 
+                    // calls and displays the patient file to the user
                     case 2:
                         file.ReadSequentialAccessOperation();
                         break;
-
+                    
+                    // finds the patient by their id within the file and displays the patient record
                     case 3:
                         file.FindPatientID();
                         break;
 
+                    // finds the patients by a minimum balance and displays their record
                     case 4:
                         file.FindPatientMinBalance();
                         break;
-
+                    
+                   // exits the application
                     case 5:
                         return;
 
@@ -48,8 +61,8 @@ namespace PatientRecordApplication
                         break;
                 }
 
-                WriteLine("Press any key to continue.");
-                ReadLine();
+                WriteLine("Press any key to continue...");
+                ReadKey();
             }
 
 
@@ -63,16 +76,7 @@ namespace PatientRecordApplication
                 WriteLine("4 Find Patients with the Minimun Balance Due.");
                 WriteLine("5 Exit");
                 Write("\nPlease enter a number to select an option: ");
-
-                try
-                {
-                    input = int.Parse(ReadLine());
-                }
-                catch (FormatException)
-                {
-                    WriteLine("Invalid input entered by user.");
-                }
-
+                input = int.Parse(ReadLine());
                 return input;
             }
         }
